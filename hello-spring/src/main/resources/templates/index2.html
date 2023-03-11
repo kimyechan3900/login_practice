@@ -1,0 +1,14 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div class="container">
+  <form action="/members/db" method="post"><!--값을 입력할 수 있는 html form--><!-- 등록버튼을 누르면 포스트 매핑으로 지정한곳으로감-->
+    <div class="form-group">
+      <label for="name">이름</label>
+      <input type="text" id="name" name="name" placeholder="이름을 입력하세요"> <!--name은 서버로 내려올때의 키값이 됨 여기선 memberForm-->
+    </div>
+    <button type="submit">등록</button>
+  </form>
+</div> <!-- /container -->
+</body>
+</html>
