@@ -1,11 +1,67 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <style>
+        /* Container and Content */
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #e6f2ff;  /* Light blue background */
+            font-family: Arial, sans-serif;
+        }
+
+        form {
+            width: 300px;  /* Adjust based on your preference */
+            border: 1px solid #004d99;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #004d99;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #b3d1ff;  /* Light blue border */
+            border-radius: 5px;
+            box-sizing: border-box;  /* Ensure padding and border are inside of total width */
+        }
+
+        button {
+            display: block;  /* Ensure the button is full width */
+            width: 100%;
+            padding: 10px 15px;
+            background-color: #ff4d4d;  /* Red color to indicate deletion */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;  /* Change cursor to pointer when hovering over the button */
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #e60000;  /* Darker red on hover */
+        }
+    </style>
+</head>
 <body>
 <div class="container">
-  <form action="/members/remove" method="post"><!--값을 입력할 수 있는 html form--><!-- 등록버튼을 누르면 포스트 매핑으로 지정한곳으로감-->
+  <form action="/members/remove" method="post">
     <div class="form-group">
       <label for="name">이름</label>
-      <input type="text" id="name" name="name" placeholder="이름을 입력하세요"> <!--name은 서버로 내려올때의 키값이 됨 여기선 memberForm-->
+      <input type="text" id="name" name="name" placeholder="이름을 입력하세요">
     </div>
     <button type="submit">삭제</button>
   </form>
