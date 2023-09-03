@@ -1,6 +1,9 @@
 package hello.hellospring.service;
 
-import hello.hellospring.domain.Member;
+import hello.hellospring.DTO.MemberRegistDTO;
+import hello.hellospring.Error.ErrorCode;
+import hello.hellospring.Error.InvalidValueException;
+import hello.hellospring.Model.Member;
 import hello.hellospring.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,23 +22,30 @@ public class MemberService {
         this.memberRepository=memberRepository;
     }
 
-    public Long join(Member member) throws SQLException {
-        validateDuplicateMember(member);
+    public void regist(MemberRegistDTO registDTO) throws InvalidValueException {
+        validateDuplicateMember(registDTO); // 중복체크
+
+        Member member = Member.builder()
+                .name(registDTO.getName())
+                .email(registDTO.getEmail())
+                .phone(registDTO.getPhone())
+                .birthdate(registDTO.getBirthdate())
+                .gender(registDTO.getGender())
+                .address(registDTO.getAddress())
+                .password(registDTO.getPassword())
+                .confirmPassword(registDTO.getConfirmPassword())
+                .build();
 
         memberRepository.save(member);
-        return member.getId();
     }
 
-    private void validateDuplicateMember(Member member) throws SQLException {
-        Optional<Member> result=memberRepository.findByName(member.getName());
-        if(result!=null) {
-            result.ifPresent(m -> {
-                throw new IllegalStateException("이미 존재하는 회원입니다.");
-            });
+    private void validateDuplicateMember(MemberRegistDTO member) {
+        if(memberRepository.existsByEmail(member.getEmail())) {
+            throw new InvalidValueException(ErrorCode.DUPLICATED_EMAIL); // 예시: 중복 멤버에 대한 적절한 에러 코드 사용
         }
     }
 
-    public List<Member> findMembers() throws SQLException {
+    public List<Member> findMembers()  {
         return memberRepository.findAll();
     }
 

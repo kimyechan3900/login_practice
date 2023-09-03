@@ -60,8 +60,12 @@
       </thead>
       <tbody>
       <tr th:each="member : ${members}">
-        <td th:text="${member.id}"></td>
+        <td th:text="${member.email}"></td>
         <td th:text="${member.name}"></td>
+        <td th:text="${member.phone}"></td>
+        <td th:text="${member.birthdate}"></td>
+        <td th:text="${member.gender}"></td>
+        <td th:text="${member.address}"></td>
       </tr>
       </tbody>
     </table>
