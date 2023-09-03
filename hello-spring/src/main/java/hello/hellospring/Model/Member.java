@@ -34,8 +34,8 @@ public class Member {
     @Column(nullable = false)
     private String password;
 
-    @Transient // confirmPassword는 데이터베이스에 저장되지 않습니다.
-    private String confirmPassword;
+
+
 
 
     // Getter, Setter 및 기타 필요한 메서드

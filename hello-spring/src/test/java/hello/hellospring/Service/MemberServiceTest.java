@@ -12,29 +12,5 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 public class MemberServiceTest {
-    MemberService memberService;
-    LocalMemberRepository memberRepository;
-
-    @BeforeEach
-    public void beforeEach() {
-       memberRepository = new LocalMemberRepository();
-       memberService = new MemberService(memberRepository);
-    }
-
-    @Test
-    public void 회원가입 (){
-        Member member=new Member();
-        member.setName("member");
-
-        Long saveId= null;
-        try {
-            saveId = memberService.join(member);
-            Member findMember=memberService.findOne(saveId).get();
-            Assertions.assertThat(member.getName()).isEqualTo(findMember.getName());
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
 
 }

@@ -63,10 +63,12 @@
 <div class="container">
   <form action="/members/change" method="post">
     <div class="form-group">
-      <label for="name">원래 이름</label>
-      <input type="text" id="name" name="name" placeholder="이름을 입력하세요">
-      <label for="change_name">바꿀 이름</label>
-      <input type="text" id="change_name" name="new_name" placeholder="수정할 이름을 입력하세요">
+      <label for="email">원래 이메일</label>
+      <input type="text" id="email" name="email" placeholder="이메일을 입력하세요">
+      <label for="password">원래 패스워드</label>
+      <input type="password" id="password" name="password" placeholder="패스워드를 입력하세요.">
+      <label for="new_password">바꿀 패스워드</label>
+      <input type="password" id="new_password" name="new_password" placeholder="바꿀 패스워드를 입력하세요.">
     </div>
     <button type="submit">등록</button>
   </form>
