@@ -6,7 +6,7 @@ plugins {
 
 group = 'hello'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
+sourceCompatibility = '11' //11 버전 업데이트
 
 repositories {
 	mavenCentral()
