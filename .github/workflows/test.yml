@@ -14,19 +14,21 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
-        with:
-          path: hello-spring  # hello-spring 디렉토리에 저장소를 체크아웃
-
-      - name: Generate Gradle Wrapper
-        run: |
-          chmod +x hello-spring/gradlew
-          cd hello-spring && ./gradlew wrapper --gradle-version=7.3.3  # Specify the desired Gradle version
+        #with:
+         # path: hello-spring  # hello-spring 디렉토리에 저장소를 체크아웃
 
       - name: Set up JDK 11
         uses: actions/setup-java@v2
         with:
           distribution: 'adopt'
           java-version: '11'
+
+      - name: Generate Gradle Wrapper
+        run: |
+          chmod +x hello-spring/gradlew
+          cd hello-spring && ./gradlew wrapper --gradle-version=7.3.3  # Specify the desired Gradle version
+
+    
 
       - name: Build with Gradle
         run: |
