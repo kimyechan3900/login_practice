@@ -52,10 +52,10 @@ jobs:
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
 
-      - name: Set up known hosts
-        run: |
-          ssh-keyscan -H "${{ secrets.SSH_PUBLIC_IP }}" >> ~/.ssh/known_hosts
-          chmod 700 ~/.ssh/known_hosts
+     ## - name: Set up known hosts
+      ##  run: |
+       ##   ssh-keyscan -H "${{ secrets.SSH_PUBLIC_IP }}" >> ~/.ssh/known_hosts
+        ##  chmod 700 ~/.ssh/known_hosts
 #
       - name: SCP FILE
         run: |
