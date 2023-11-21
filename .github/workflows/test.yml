@@ -3,9 +3,6 @@ name: Build and Test on Pull Request
 on:
   push:
     branches: [dev]
-  pull_request:
-    branches:
-      - master
 
 jobs:
   build:
@@ -54,7 +51,7 @@ jobs:
 
       - name: Set up known hosts
         run: |
-          ssh-keyscan -H 3.38.209.167 >> ~/.ssh/known_hosts
+          ssh-keyscan -v -H 3.38.209.167 >> ~/.ssh/known_hosts
           chmod 644 ~/.ssh/known_hosts
           chmod 700 ~/.ssh
 #
