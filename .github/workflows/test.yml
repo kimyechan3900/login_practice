@@ -61,7 +61,7 @@ jobs:
         run: |
           cd hello-spring/build/libs && ls
           cat ~/.ssh/id_rsa
-          ls && scp -i ~/.ssh/id_rsa hello-spring-0.0.1-SNAPSHOT.jar "${{ secrets.USERNAME }}"@"${{ secrets.SSH_PUBLIC_IP }}":/home/ubuntu
+          ls && scp -i ~/.ssh/id_rsa hello-spring-0.0.1-SNAPSHOT.jar ubuntu@:3.38.209.167:/home/ubuntu
 
       - name: SSH and Deploy
         run: |
