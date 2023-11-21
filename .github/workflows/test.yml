@@ -56,7 +56,7 @@ jobs:
         run: |
           echo "${{ secrets.SSH_KNOWN_HOSTS }}" >> ~/.ssh/known_hosts
           chmod 644 ~/.ssh/known_hosts
-
+##
       - name: SCP FILE
         run: |
           cd hello-spring && ls
