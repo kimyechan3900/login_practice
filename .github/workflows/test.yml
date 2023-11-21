@@ -55,7 +55,7 @@ jobs:
       - name: Set up known hosts
         run: |
           ssh-keyscan -H "${{ secrets.SSH_PUBLIC_IP }}" >> ~/.ssh/known_hosts
-          chmod 644 ~/.ssh/known_hosts
+          chmod 700 ~/.ssh/known_hosts
 
       - name: SCP FILE
         run: |
