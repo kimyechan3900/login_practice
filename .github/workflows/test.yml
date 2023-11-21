@@ -25,6 +25,7 @@ jobs:
       - name: Generate Gradle Wrapper
         run: |
           cd hello-spring
+          ls
           chmod +x gradlew
           ./gradlew wrapper --gradle-version=7.3.3  # Specify the desired Gradle version
 
