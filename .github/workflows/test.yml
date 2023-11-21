@@ -76,4 +76,4 @@ jobs:
       - name: SSH and Deploy
         if: ${{ steps.port-check.outcome == 'success' }}
         run: |
-          ssh -i "${{ secrets.SSH_PRIVATE_KEY }}" "${{ secrets.SSH_USERNAME }}"@"${{ secrets.SSH_PUBLIC_IP }}" "java -jar /home/ubuntu/hello-spring-0.0.1-SNAPSHOT.jar"
+          ssh -i "${{ secrets.SSH_PRIVATE_KEY }}" "${{ secrets.SSH_USERNAME }}"@"${{ secrets.SSH_PUBLIC_IP }}" "nohup java -jar /home/ubuntu/hello-spring-0.0.1-SNAPSHOT.jar > deployment.log 2>&1 &"
