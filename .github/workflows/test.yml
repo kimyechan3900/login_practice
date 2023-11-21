@@ -17,6 +17,11 @@ jobs:
         with:
           path: hello-spring  # hello-spring 디렉토리에 저장소를 체크아웃
 
+      - name: Check Current Directory
+        run: ls -la
+        working-directory: hello-spring
+
+
       - name: Generate Gradle Wrapper
         run: |
           cd hello-spring
