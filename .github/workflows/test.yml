@@ -34,13 +34,6 @@ jobs:
       - name: Run Tests
         run: |
           cd hello-spring && ./gradlew test
-          
-      - name: Set up JDK
-        uses: actions/setup-java@v2
-        with:
-          distribution: 'adopt'
-          java-version: '11'
-
 
 
       - name: Set up SSH
