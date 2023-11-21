@@ -14,20 +14,20 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
-        #with:
-         # path: hello-spring  # hello-spring 디렉토리에 저장소를 체크아웃
+        #Checkout
 
       - name: Set up JDK 11
         uses: actions/setup-java@v2
         with:
           distribution: 'adopt'
           java-version: '11'
+        #JAVA JDK 11버전으로 환경설정
 
       - name: Generate Gradle Wrapper
         run: |
           chmod +x hello-spring/gradlew
           cd hello-spring && ./gradlew wrapper --gradle-version=7.3.3  # Specify the desired Gradle version
-
+        
     
 
       - name: Build with Gradle
@@ -37,3 +37,30 @@ jobs:
       - name: Run Tests
         run: |
           cd hello-spring && ./gradlew test
+          
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'adopt'
+          java-version: '11'
+
+
+
+      - name: Set up SSH
+        run: |
+          mkdir -p ~/.ssh/
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+
+      - name: Set up known hosts
+        run: |
+          echo "${{ secrets.SSH_KNOWN_HOSTS }}" >> ~/.ssh/known_hosts
+          chmod 644 ~/.ssh/known_hosts
+
+      - name: SCP FILE
+        run: |
+          scp -i "${{ secrets.SSH_PRIVATE_KEY }}" hello-spring/build/libs/hello-spring-0.0.1-SNAPSHOT.jar "${{ secrets.USER_NAME }}"@"${{ secrets.SSH_PUBLIC_IP }}":/home/ubuntu
+
+      - name: SSH and Deploy
+        run: |
+          ssh -i "${{ secrets.SSH_PRIVATE_KEY }}" "${{ secrets.SSH_USERNAME }}"@"${{ secrets.SSH_PUBLIC_IP }}" "java -jar /home/ubuntu/hello-spring-0.0.1-SNAPSHOT.jar"
