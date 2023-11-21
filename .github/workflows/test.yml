@@ -38,9 +38,9 @@ jobs:
       - name: Build with Gradle
         run: |
           ls
-          ./gradlew build
+          cd hello-spring/hello-spring && ./gradlew build
 
       - name: Run Tests
         run: |
           ls
-          ./gradlew test
+          cd hello-spring/hello-spring && ./gradlew test
