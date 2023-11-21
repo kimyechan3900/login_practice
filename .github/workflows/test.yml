@@ -26,14 +26,14 @@ jobs:
       - name: Generate Gradle Wrapper
         run: |
           chmod +x hello-spring/gradlew
-          cd hello-spring && ./gradlew wrapper --gradle-version=7.3.3  # Specify the desired Gradle version
+          hello-spring/gradlew wrapper --gradle-version=7.3.3  # Specify the desired Gradle version
 
     
 
       - name: Build with Gradle
         run: |
-          cd hello-spring && ./gradlew build
+          hello-spring/gradlew build
 
       - name: Run Tests
         run: |
-          cd hello-spring && ./gradlew test
+          hello-spring/gradlew test
