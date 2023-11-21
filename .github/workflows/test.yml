@@ -60,7 +60,7 @@ jobs:
       - name: SCP FILE
         run: |
           cd hello-spring && ls
-          scp -i "${{ secrets.SSH_PRIVATE_KEY }}" build/libs/hello-spring-0.0.1-SNAPSHOT.jar "${{ secrets.USER_NAME }}"@"${{ secrets.SSH_PUBLIC_IP }}":/home/ubuntu
+          scp -i "${{ secrets.SSH_PRIVATE_KEY }}" hello-spring/build/libs/hello-spring-0.0.1-SNAPSHOT.jar "${{ secrets.USER_NAME }}"@"${{ secrets.SSH_PUBLIC_IP }}":/home/ubuntu
 
       - name: SSH and Deploy
         run: |
