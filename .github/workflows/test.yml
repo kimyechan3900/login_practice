@@ -23,7 +23,8 @@ jobs:
       - name: Generate Gradle Wrapper
         run: |
           chmod +x hello-spring/gradlew
-          cd hello-spring && ./gradlew wrapper --gradle-version=7.3.3  # Specify the desired Gradle version
+          cd hello-spring
+          ./gradlew wrapper --gradle-version=7.3.3  # Specify the desired Gradle version
         
     
 
@@ -45,9 +46,8 @@ jobs:
       - name: Set up known hosts
         run: |
           ssh-keyscan -H "${{ secrets.SSH_PUBLIC_IP }}" >> ~/.ssh/known_hosts
-          chmod 644 ~/.ssh/known_hosts
-          chmod 700 ~/.ssh
-#
+      
+
       - name: SCP FILE
         run: |
           cd hello-spring/build/libs && ls
