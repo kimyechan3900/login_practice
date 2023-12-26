@@ -9,51 +9,57 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # 단계 1: 저장소 체크아웃 -> 작업 디렉토리의 최신 소스코드를 가져옴
       - name: Checkout Repository
         uses: actions/checkout@v2
-        #Checkout
 
+      # 단계 2: JDK 11 설정 -> JAVA JDK 11로 설정
       - name: Set up JDK 11
         uses: actions/setup-java@v2
         with:
           distribution: 'adopt'
           java-version: '11'
-        #JAVA JDK 11버전으로 환경설정
 
+      # 단계 3: Gradle Wrapper 생성 ->Wrapper를 생성하여 추후에 Gradle이 설치되어있지않아도 다운로드 가능함.
       - name: Generate Gradle Wrapper
         run: |
-          chmod +x hello-spring/gradlew
+          chmod +x hello-spring/gradlew  
           cd hello-spring
           ./gradlew wrapper --gradle-version=7.3.3  # Specify the desired Gradle version
         
-    
 
+      # 단계 4: Gradle로 빌드 -> Gradle을 이용하여 스프링 서버 빌드
       - name: Build with Gradle
         run: |
           cd hello-spring && ./gradlew build
 
+      # 단계 5: 테스트 실행 -> 스프링에 있는 테스트코드 실행
       - name: Run Tests
         run: |
           cd hello-spring && ./gradlew test
 
-#
+      # 단계 6: 배포를 위한 SSH 설정 -> 클라우드 서버에 내 ssh 개인키 저장 (나중에 개인키로 ssh접속하기 위해 필수)
       - name: Set up SSH
         run: |
           mkdir -p ~/.ssh/
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
 
+      # 단계 7: SSH를 위한 known hosts 설정 -> 클라우드 서버의 공개키를 가져옴 (서버인증)
       - name: Set up known hosts
         run: |
           ssh-keyscan -H "${{ secrets.SSH_PUBLIC_IP }}" >> ~/.ssh/known_hosts
       
 
+      # 단계 8: SCP FILE - JAR 파일을 원격 서버로 복사
       - name: SCP FILE
         run: |
           cd hello-spring/build/libs && ls
           cat ~/.ssh/id_rsa
           ls && scp -i ~/.ssh/id_rsa hello-spring-0.0.1-SNAPSHOT.jar "${{ secrets.SSH_USERNAME }}"@"${{ secrets.SSH_PUBLIC_IP }}":/home/ubuntu
 
+
+      # 단계 9: 클라우드 서버에서 포트 8080이 사용 중인지 확인
       - name: Check if Port 8080 is in use
         id: port-check
         run: |
@@ -64,6 +70,8 @@ jobs:
             echo "Port 8080 is available."
           fi
 
+
+      # 단계 10: SSH 및 배포 - 원격 서버에서 애플리케이션 시작
       - name: SSH and Deploy
         if: ${{ steps.port-check.outcome == 'success' }}
         run: |
