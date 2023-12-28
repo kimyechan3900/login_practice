@@ -7,6 +7,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        server: [ 'SERVER1', 'SERVER2', 'SERVER3' ]
 
     steps:
       # 단계 1: 저장소 체크아웃 -> 작업 디렉토리의 최신 소스코드를 가져옴
@@ -56,50 +59,17 @@ jobs:
           mkdir -p ~/.ssh
           touch ~/.ssh/known_hosts
           
-          ssh-keyscan -H ${{ secrets.SERVER1_IP }} >> ~/.ssh/known_hosts
-          ssh-keyscan -H ${{ secrets.SERVER2_IP }} >> ~/.ssh/known_hosts
-          ssh-keyscan -H ${{ secrets.SERVER3_IP }} >> ~/.ssh/known_hosts
+          ssh-keyscan -H ${{ secrets[matrix.server+'_IP'] }} >> ~/.ssh/known_hosts
           
-          scp -i temp_key ${{ secrets.LOCAL_FILE_PATH }} ubuntu@${{ secrets.SERVER1_IP }}:${{ secrets.DESTINATION_FILE_PATH }}
-          scp -i temp_key ${{ secrets.LOCAL_FILE_PATH }} ubuntu@${{ secrets.SERVER2_IP }}:${{ secrets.DESTINATION_FILE_PATH }}
-          scp -i temp_key ${{ secrets.LOCAL_FILE_PATH }} ubuntu@${{ secrets.SERVER3_IP }}:${{ secrets.DESTINATION_FILE_PATH }}
+          scp -i temp_key ${{ secrets.LOCAL_FILE_PATH }} ubuntu@${{ secrets[matrix.server+'_IP'] }}:${{ secrets.DESTINATION_FILE_PATH }}
           rm temp_key
       
       
 
-      # 서버 1 도커 컴포즈 배포
-      - name: SSH to SERVER1
+      - name: SSH to ${{ matrix.server }}
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ secrets.SERVER1_IP }}
-          username: ubuntu
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: 22
-          script: |
-            cd login_practice/hello-spring
-            docker pull ${{ secrets.DOCKER_IMAGE_NAME }}
-            sudo docker-compose up -d --remove-orphans  
-            
-
-      # 서버 2 도커 컴포즈 배포
-      - name: SSH to SERVER2
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.SERVER2_IP }}
-          username: ubuntu
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: 22
-          script: |
-            cd login_practice/hello-spring
-            sudo docker pull ${{ secrets.DOCKER_IMAGE_NAME }}
-            sudo docker-compose up -d --remove-orphans  
-            
-
-      # 서버 3 도커 컴포즈 배포
-      - name: SSH to SERVER3
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.SERVER3_IP }}
+          host: ${{ secrets[matrix.server+'_IP'] }}
           username: ubuntu
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
