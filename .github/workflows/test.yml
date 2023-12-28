@@ -50,6 +50,7 @@ jobs:
       # 단계 8: SCP FILE - JAR 파일을 원격 서버로 복사 (서버에 따라 수평확장)
       - name: SCP FILE
         run: |
+          ls
           cd hello-spring
           scp -i ${{ secrets.PRIVATE_KEY }} -p 22 ${{ secrets.LOCAL_FILE_PATH }} ubuntu@${{ secrets.SERVER1_IP }}:${{ secrets.DESTINATION_FILE_PATH }}
           scp -i ${{ secrets.PRIVATE_KEY }} -p 22 ${{ secrets.LOCAL_FILE_PATH }} ubuntu@${{ secrets.SERVER2_IP }}:${{ secrets.DESTINATION_FILE_PATH }}
