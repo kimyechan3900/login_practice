@@ -47,15 +47,37 @@ jobs:
           
 
 
-      # 단계 8: SCP FILE - JAR 파일을 원격 서버로 복사 (서버에 따라 수평확장)
-      - name: SCP FILE
-        run: |
-          ls
-          cd hello-spring
-          ls
-          scp -i ${{ secrets.PRIVATE_KEY }} -p 22 ${{ secrets.LOCAL_FILE_PATH }} ubuntu@${{ secrets.SERVER1_IP }}:${{ secrets.DESTINATION_FILE_PATH }}
-          scp -i ${{ secrets.PRIVATE_KEY }} -p 22 ${{ secrets.LOCAL_FILE_PATH }} ubuntu@${{ secrets.SERVER2_IP }}:${{ secrets.DESTINATION_FILE_PATH }}
-          scp -i ${{ secrets.PRIVATE_KEY }} -p 22 ${{ secrets.LOCAL_FILE_PATH }} ubuntu@${{ secrets.SERVER3_IP }}:${{ secrets.DESTINATION_FILE_PATH }}
+      - name: SCP SERVER1
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.SERVER1_IP }}
+          username: ubuntu
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22
+          source: ${{ secrets.LOCAL_FILE_PATH }}
+          target: ${{ secrets.DESTINATION_FILE_PATH }}
+
+      - name: SCP SERVER2
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.SERVER2_IP }}
+          username: ubuntu
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22
+          source: ${{ secrets.LOCAL_FILE_PATH }}
+          target: ${{ secrets.DESTINATION_FILE_PATH }}
+
+      - name: SCP SERVER3
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.SERVER3_IP }}
+          username: ubuntu
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22
+          source: ${{ secrets.LOCAL_FILE_PATH }}
+          target: ${{ secrets.DESTINATION_FILE_PATH }}
+
+
 
 
       # 서버 1 도커 컴포즈 배포
