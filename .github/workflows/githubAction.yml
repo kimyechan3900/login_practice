@@ -38,7 +38,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
 
-      #도커 이미지 생성 및 푸쉬ee
+      #도커 이미지 생성 및 푸시
       - name: Build and push Docker image
         run: |
           cd hello-spring
@@ -91,7 +91,7 @@ jobs:
           port: 22
           script: |
             cd login_practice/hello-spring
-            docker pull ${{ secrets.DOCKER_IMAGE_NAME }}
+            sudo docker pull ${{ secrets.DOCKER_IMAGE_NAME }}
             sudo docker-compose up -d --remove-orphans  
             
 
@@ -105,5 +105,5 @@ jobs:
           port: 22
           script: |
             cd login_practice/hello-spring
-            docker pull ${{ secrets.DOCKER_IMAGE_NAME }}
+            sudo docker pull ${{ secrets.DOCKER_IMAGE_NAME }}
             sudo docker-compose up -d --remove-orphans  
