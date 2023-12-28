@@ -38,7 +38,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
 
-      #도커 이미지 생성 및 푸쉬
+      #도커 이미지 생성 및 푸쉬ee
       - name: Build and push Docker image
         run: |
           cd hello-spring
