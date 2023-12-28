@@ -52,10 +52,14 @@ jobs:
           cd hello-spring
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > temp_key
           chmod 600 temp_key
+          ssh-keyscan -H ${{ secrets.SERVER1_IP }} >> ~/.ssh/known_hosts
+          ssh-keyscan -H ${{ secrets.SERVER2_IP }} >> ~/.ssh/known_hosts
+          ssh-keyscan -H ${{ secrets.SERVER3_IP }} >> ~/.ssh/known_hosts
           scp -i temp_key -p 22 build/libs/hello-spring-0.0.1-SNAPSHOT.jar ubuntu@${{ secrets.SERVER1_IP }}:/
           scp -i temp_key -p 22 build/libs/hello-spring-0.0.1-SNAPSHOT.jar ubuntu@${{ secrets.SERVER2_IP }}:/
           scp -i temp_key -p 22 build/libs/hello-spring-0.0.1-SNAPSHOT.jar ubuntu@${{ secrets.SERVER3_IP }}:/
           rm temp_key
+      
       
 
       # 서버 1 도커 컴포즈 배포
