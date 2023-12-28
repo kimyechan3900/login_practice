@@ -41,8 +41,10 @@ jobs:
       #도커 이미지 생성 및 푸쉬
       - name: Build and push Docker image
         run: |
+          cd hello-spring
           docker build -t ${{ secrets.DOCKER_IMAGE_NAME }} .
           docker push ${{ secrets.DOCKER_IMAGE_NAME }}
+          
 
 
       # 단계 8: SCP FILE - JAR 파일을 원격 서버로 복사 (서버에 따라 수평확장)
