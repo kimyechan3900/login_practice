@@ -26,6 +26,7 @@ jobs:
       - name: Build with Gradle
         run: |
           cd hello-spring
+          chmod +x gradlew
           ./gradlew build
 
 
