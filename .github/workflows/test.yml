@@ -47,38 +47,22 @@ jobs:
           
 
 
-      - name: SCP SERVER1
+      - name: SCP FILES
         uses: appleboy/scp-action@master
         with:
-          host: ${{ secrets.SERVER1_IP }}
           username: ubuntu
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           source: ${{ secrets.LOCAL_FILE_PATH }}
           target: ${{ secrets.DESTINATION_FILE_PATH }}
-
-      - name: SCP SERVER2
-        uses: appleboy/scp-action@master
-        with:
-          host: ${{ secrets.SERVER2_IP }}
-          username: ubuntu
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: 22
-          source: ${{ secrets.LOCAL_FILE_PATH }}
-          target: ${{ secrets.DESTINATION_FILE_PATH }}
-
-      - name: SCP SERVER3
-        uses: appleboy/scp-action@master
-        with:
-          host: ${{ secrets.SERVER3_IP }}
-          username: ubuntu
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: 22
-          source: ${{ secrets.LOCAL_FILE_PATH }}
-          target: ${{ secrets.DESTINATION_FILE_PATH }}
-
-
-
+          servers: |
+            ${{ secrets.SERVER1_IP }}
+            ${{ secrets.SERVER2_IP }}
+            ${{ secrets.SERVER3_IP }}
+      
+      
+      
+      
 
       # 서버 1 도커 컴포즈 배포
       - name: SSH to SERVER1
