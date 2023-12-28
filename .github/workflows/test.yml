@@ -78,7 +78,7 @@ jobs:
           script: |
             cd login_practice/hello-spring
             docker pull ${{ secrets.DOCKER_IMAGE_NAME }}
-            docker-compose up -d --remove-orphans  
+            sudo docker-compose up -d --remove-orphans  
             
 
       # 서버 2 도커 컴포즈 배포
@@ -92,7 +92,7 @@ jobs:
           script: |
             cd login_practice/hello-spring
             docker pull ${{ secrets.DOCKER_IMAGE_NAME }}
-            docker-compose up -d --remove-orphans  
+            sudo docker-compose up -d --remove-orphans  
             
 
       # 서버 3 도커 컴포즈 배포
@@ -106,4 +106,4 @@ jobs:
           script: |
             cd login_practice/hello-spring
             docker pull ${{ secrets.DOCKER_IMAGE_NAME }}
-            docker-compose up -d --remove-orphans  
+            sudo docker-compose up -d --remove-orphans  
