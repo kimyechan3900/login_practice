@@ -51,9 +51,9 @@ jobs:
       - name: SCP FILE
         run: |
           cd hello-spring
-          scp -i ${{ secrets.SSH_PRIVATE_KEY }} -p 22 ${{ secrets.LOCAL_FILE_PATH }} ubuntu@${{ secrets.SERVER1_IP }}:${{ secrets.DESTINATION_FILE_PATH }}
-          scp -i ${{ secrets.SSH_PRIVATE_KEY }} -p 22 ${{ secrets.LOCAL_FILE_PATH }} ubuntu@${{ secrets.SERVER2_IP }}:${{ secrets.DESTINATION_FILE_PATH }}
-          scp -i ${{ secrets.SSH_PRIVATE_KEY }} -p 22 ${{ secrets.LOCAL_FILE_PATH }} ubuntu@${{ secrets.SERVER3_IP }}:${{ secrets.DESTINATION_FILE_PATH }}
+          scp -i "${{ secrets.SSH_PRIVATE_KEY }}" -p 22 ${{ secrets.LOCAL_FILE_PATH }} ubuntu@${{ secrets.SERVER1_IP }}:${{ secrets.DESTINATION_FILE_PATH }}
+          scp -i "${{ secrets.SSH_PRIVATE_KEY }}" -p 22 ${{ secrets.LOCAL_FILE_PATH }} ubuntu@${{ secrets.SERVER2_IP }}:${{ secrets.DESTINATION_FILE_PATH }}
+          scp -i "${{ secrets.SSH_PRIVATE_KEY }}" -p 22 ${{ secrets.LOCAL_FILE_PATH }} ubuntu@${{ secrets.SERVER3_IP }}:${{ secrets.DESTINATION_FILE_PATH }}
 
 
       # 서버 1 도커 컴포즈 배포
