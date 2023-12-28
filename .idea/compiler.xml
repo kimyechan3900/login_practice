@@ -11,9 +11,5 @@
         <module name="hello-spring.hello-spring.main~1" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="hello-spring.hello-spring.main" target="11" />
-      <module name="hello-spring.hello-spring.test" target="11" />
-    </bytecodeTargetLevel>
   </component>
 </project>
