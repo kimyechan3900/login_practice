@@ -73,7 +73,7 @@ jobs:
         with:
           host: ${{ secrets.SERVER1_IP }}
           username: ubuntu
-          key: ${{ secrets.PRIVATE_KEY }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           script: |
             cd login_practice/hello-spring
@@ -87,7 +87,7 @@ jobs:
         with:
           host: ${{ secrets.SERVER2_IP }}
           username: ubuntu
-          key: ${{ secrets.PRIVATE_KEY }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           script: |
             cd login_practice/hello-spring
@@ -101,7 +101,7 @@ jobs:
         with:
           host: ${{ secrets.SERVER3_IP }}
           username: ubuntu
-          key: ${{ secrets.PRIVATE_KEY }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           script: |
             cd login_practice/hello-spring
