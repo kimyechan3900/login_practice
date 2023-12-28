@@ -59,9 +59,13 @@ jobs:
           mkdir -p ~/.ssh
           touch ~/.ssh/known_hosts
           
-          ssh-keyscan -H ${{ secrets[matrix.server+'_IP'] }} >> ~/.ssh/known_hosts
+          ssh-keyscan -H ${{ secrets.SERVER1_IP }} >> ~/.ssh/known_hosts
+          ssh-keyscan -H ${{ secrets.SERVER2_IP }} >> ~/.ssh/known_hosts
+          ssh-keyscan -H ${{ secrets.SERVER3_IP }} >> ~/.ssh/known_hosts
           
-          scp -i temp_key ${{ secrets.LOCAL_FILE_PATH }} ubuntu@${{ secrets[matrix.server+'_IP'] }}:${{ secrets.DESTINATION_FILE_PATH }}
+          scp -i temp_key ${{ secrets.LOCAL_FILE_PATH }} ubuntu@${{ secrets.SERVER1_IP }}:${{ secrets.DESTINATION_FILE_PATH }}
+          scp -i temp_key ${{ secrets.LOCAL_FILE_PATH }} ubuntu@${{ secrets.SERVER2_IP }}:${{ secrets.DESTINATION_FILE_PATH }}
+          scp -i temp_key ${{ secrets.LOCAL_FILE_PATH }} ubuntu@${{ secrets.SERVER3_IP }}:${{ secrets.DESTINATION_FILE_PATH }}
           rm temp_key
       
       
