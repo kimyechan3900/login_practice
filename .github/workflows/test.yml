@@ -52,6 +52,7 @@ jobs:
         run: |
           ls
           cd hello-spring
+          ls
           scp -i ${{ secrets.PRIVATE_KEY }} -p 22 ${{ secrets.LOCAL_FILE_PATH }} ubuntu@${{ secrets.SERVER1_IP }}:${{ secrets.DESTINATION_FILE_PATH }}
           scp -i ${{ secrets.PRIVATE_KEY }} -p 22 ${{ secrets.LOCAL_FILE_PATH }} ubuntu@${{ secrets.SERVER2_IP }}:${{ secrets.DESTINATION_FILE_PATH }}
           scp -i ${{ secrets.PRIVATE_KEY }} -p 22 ${{ secrets.LOCAL_FILE_PATH }} ubuntu@${{ secrets.SERVER3_IP }}:${{ secrets.DESTINATION_FILE_PATH }}
