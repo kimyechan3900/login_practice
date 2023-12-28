@@ -47,14 +47,16 @@ jobs:
           
 
 
-      # 단계 8: SCP FILE - JAR 파일을 원격 서버로 복사 (서버에 따라 수평확장)
       - name: SCP FILE
         run: |
           cd hello-spring
-          scp -i "${{ secrets.SSH_PRIVATE_KEY }}" -p 22 build/libs/hello-spring-0.0.1-SNAPSHOT.jar ubuntu@${{ secrets.SERVER1_IP }}:/
-          scp -i "${{ secrets.SSH_PRIVATE_KEY }}" -p 22 build/libs/hello-spring-0.0.1-SNAPSHOT.jar ubuntu@${{ secrets.SERVER2_IP }}:/
-          scp -i "${{ secrets.SSH_PRIVATE_KEY }}" -p 22 build/libs/hello-spring-0.0.1-SNAPSHOT.jar ubuntu@${{ secrets.SERVER3_IP }}:/
-
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > temp_key
+          chmod 600 temp_key
+          scp -i temp_key -p 22 build/libs/hello-spring-0.0.1-SNAPSHOT.jar ubuntu@${{ secrets.SERVER1_IP }}:/
+          scp -i temp_key -p 22 build/libs/hello-spring-0.0.1-SNAPSHOT.jar ubuntu@${{ secrets.SERVER2_IP }}:/
+          scp -i temp_key -p 22 build/libs/hello-spring-0.0.1-SNAPSHOT.jar ubuntu@${{ secrets.SERVER3_IP }}:/
+          rm temp_key
+      
 
       # 서버 1 도커 컴포즈 배포
       - name: SSH to SERVER1
