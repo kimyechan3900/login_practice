@@ -7,9 +7,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        server: [ 'SERVER1', 'SERVER2', 'SERVER3' ]
 
     steps:
       # 단계 1: 저장소 체크아웃 -> 작업 디렉토리의 최신 소스코드를 가져옴
