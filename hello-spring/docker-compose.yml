@@ -1,6 +1,6 @@
 version: "3"
 services:
   my-spring-app:
-    image: tioon/spring
+    image: tioon/new-repo
     ports:
       - "8080:8080"
