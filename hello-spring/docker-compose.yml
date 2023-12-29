@@ -1,8 +1,6 @@
 version: "3"
 services:
   my-spring-app:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: tioon/spring
     ports:
-      - 8080:8080
+      - "8080:8080"
