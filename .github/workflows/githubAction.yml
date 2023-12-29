@@ -48,36 +48,30 @@ jobs:
           cd hello-spring
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > temp_key
           chmod 600 temp_key
-
+          
           mkdir -p ~/.ssh
           touch ~/.ssh/known_hosts
-
-          for server in ${{ secrets.SERVER1_IP }} ${{ secrets.SERVER2_IP }} ${{ secrets.SERVER3_IP }}; do
-            ssh-keyscan -H $server >> ~/.ssh/known_hosts
-            scp -i temp_key ${{ secrets.LOCAL_FILE_PATH }} ubuntu@$server:${{ secrets.DESTINATION_FILE_PATH }}
-          done
-
+          
+          ssh-keyscan -H ${{ secrets.SERVER1_IP }} >> ~/.ssh/known_hosts
+          ssh-keyscan -H ${{ secrets.SERVER2_IP }} >> ~/.ssh/known_hosts
+          ssh-keyscan -H ${{ secrets.SERVER3_IP }} >> ~/.ssh/known_hosts
+          
+          scp -i temp_key ${{ secrets.LOCAL_FILE_PATH }} ubuntu@${{ secrets.SERVER1_IP }}:${{ secrets.DESTINATION_FILE_PATH }}
+          scp -i temp_key ${{ secrets.LOCAL_FILE_PATH }} ubuntu@${{ secrets.SERVER2_IP }}:${{ secrets.DESTINATION_FILE_PATH }}
+          scp -i temp_key ${{ secrets.LOCAL_FILE_PATH }} ubuntu@${{ secrets.SERVER3_IP }}:${{ secrets.DESTINATION_FILE_PATH }}
           rm temp_key
-      
       
       
 
       # 각 서버에 SSH로 접속하여 도커 컴포즈로 배포
-      - name: SSH to Servers
+      - name: SSH to SERVER1
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ matrix.server_ip }}
+          host: ${{ secrets.SERVER1_IP }},${{ secrets.SERVER2_IP }},${{ secrets.SERVER3_IP }}
           username: ubuntu
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           script: |
             cd login_practice/hello-spring
             docker pull ${{ secrets.DOCKER_IMAGE_NAME }}
-            sudo docker-compose up -d --remove-orphans
-        env:
-          SERVER1_IP: ${{ secrets.SERVER1_IP }}
-          SERVER2_IP: ${{ secrets.SERVER2_IP }}
-          SERVER3_IP: ${{ secrets.SERVER3_IP }}
-          matrix:
-            server_ip: [ ${ { secrets.SERVER1_IP } }, ${ { secrets.SERVER2_IP } }, ${ { secrets.SERVER3_IP } } ]
-
+            sudo docker-compose up -d --remove-orphans  
