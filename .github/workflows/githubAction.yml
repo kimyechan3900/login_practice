@@ -44,7 +44,6 @@ jobs:
 
      
           
-          
       # SCP로 최신 JAR 파일 전송
       - name: SCP to SERVERS
         uses: appleboy/scp-action@master
@@ -62,7 +61,7 @@ jobs:
       - name: SSH to SERVERS
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ secrets.SERVER1_IP }}, ${{ secrets.SERVER2_IP }}, ${{ secrets.SERVER3_IP }}
+          host: ${{ secrets.SERVER1_IP }},${{ secrets.SERVER2_IP }},${{ secrets.SERVER3_IP }}
           username: ubuntu
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
