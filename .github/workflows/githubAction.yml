@@ -66,6 +66,7 @@ jobs:
       - name: SSH to Servers
         uses: appleboy/ssh-action@master
         with:
+          host: ${{ matrix.server_ip }}
           username: ubuntu
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
@@ -77,4 +78,6 @@ jobs:
           SERVER1_IP: ${{ secrets.SERVER1_IP }}
           SERVER2_IP: ${{ secrets.SERVER2_IP }}
           SERVER3_IP: ${{ secrets.SERVER3_IP }}
+          matrix:
+            server_ip: [ ${ { secrets.SERVER1_IP } }, ${ { secrets.SERVER2_IP } }, ${ { secrets.SERVER3_IP } } ]
 
