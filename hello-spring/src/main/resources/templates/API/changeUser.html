@@ -13,7 +13,7 @@
         }
 
         form {
-            width: 300px;  /* Adjust based on your preference */
+            width: 350px;  /* Adjusted based on the new content */
             border: 1px solid #004d99;
             padding: 20px;
             background-color: white;
@@ -27,6 +27,7 @@
 
         label {
             display: block;
+            margin-top: 10px;
             margin-bottom: 5px;
             color: #004d99;
         }
@@ -37,36 +38,39 @@
             border: 1px solid #b3d1ff;  /* Light blue border */
             border-radius: 5px;
             box-sizing: border-box;  /* Ensure padding and border are inside of total width */
+            margin-bottom: 10px;  /* Space between inputs */
         }
 
         button {
             display: block;  /* Ensure the button is full width */
             width: 100%;
             padding: 10px 15px;
-            background-color: #ff4d4d;  /* Red color to indicate deletion */
+            background-color: #007bff;
             color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;  /* Change cursor to pointer when hovering over the button */
             transition: background-color 0.3s;
+            margin-top: 10px;  /* Add space above the button */
         }
 
         button:hover {
-            background-color: #e60000;  /* Darker red on hover */
+            background-color: #0056b3;
         }
     </style>
 </head>
 <body>
 <div class="container">
-  <form action="/members/remove" method="post">
+  <form action="/users/change" method="post">
     <div class="form-group">
-      <label for="email">이메일</label>
+      <label for="email">원래 이메일</label>
       <input type="text" id="email" name="email" placeholder="이메일을 입력하세요">
-
-      <label for="password">비밀번호</label>
-      <input type="password" id="password" name="password" placeholder="비밀번호를 입력하세요">
+      <label for="password">원래 패스워드</label>
+      <input type="password" id="password" name="password" placeholder="패스워드를 입력하세요.">
+      <label for="new_password">바꿀 패스워드</label>
+      <input type="password" id="new_password" name="new_password" placeholder="바꿀 패스워드를 입력하세요.">
     </div>
-    <button type="submit">삭제</button>
+    <button type="submit">등록</button>
   </form>
 </div> <!-- /container -->
 </body>

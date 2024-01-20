@@ -1,6 +1,6 @@
 package hello.hellospring.controller;
 
-import hello.hellospring.service.MemberService;
+import hello.hellospring.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,11 +8,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class HomeController {
-    private MemberService memberService;
+    private UserService userService;
 
     @Autowired
-    public HomeController(MemberService memberService) {
-        this.memberService = memberService;
+    public HomeController(UserService userService) {
+        this.userService = userService;
     }
 
 
@@ -24,9 +24,5 @@ public class HomeController {
         return "hello";
     }
 
-    @GetMapping("/")
-    public String control_home(){
-        return "home";
-    }
 
 }

@@ -63,17 +63,17 @@
       </tr>
       </thead>
       <tbody>
-      <tr th:each="member : ${members}">
-        <td th:text="${member.email}"></td>
-        <td th:text="${member.name}"></td>
-        <td th:text="${member.phone}"></td>
-        <td th:text="${member.birthdate}"></td>
-        <td th:text="${member.gender}"></td>
-        <td th:text="${member.address}"></td>
+      <tr th:each="user : ${users}">
+        <td th:text="${user.email}"></td>
+        <td th:text="${user.name}"></td>
+        <td th:text="${user.phone}"></td>
+        <td th:text="${user.birthdate}"></td>
+        <td th:text="${user.gender}"></td>
+        <td th:text="${user.address}"></td>
       </tr>
       </tbody>
     </table>
-    <a href="/members/change">회원 비밀번호 변경</a>
+    <a href="/users/change">회원 비밀번호 변경</a>
   </div>
 </div> <!-- /container -->
 </body>
