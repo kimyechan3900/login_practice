@@ -1,28 +1,32 @@
 plugins {
 	id 'java'
-	id 'org.springframework.boot' version '2.5.4'
+	id 'org.springframework.boot' version '3.0.2'
 	id 'io.spring.dependency-management' version '1.1.0'
 }
 
-group = 'hello'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11' //11 버전 업데이트
+group 'me.shinsunyoung'
+version '1.0'
+sourceCompatibility = '17'
 
 repositories {
 	mavenCentral()
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'mysql:mysql-connector-java:8.0.23'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation 'org.projectlombok:lombok:1.18.26'
-	annotationProcessor 'org.projectlombok:lombok:1.18.26'
-	runtimeOnly 'mysql:mysql-connector-java:8.0.23'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-}
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
 
+	runtimeOnly 'com.h2database:h2'
+
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.security:spring-security-test'
+}
 tasks.named('test') {
 	useJUnitPlatform()
 }
