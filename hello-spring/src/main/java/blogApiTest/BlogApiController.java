@@ -1,4 +1,4 @@
-package login.securitylogin.controller;
+package blogApiTest;
 
 import lombok.RequiredArgsConstructor;
 import login.securitylogin.domain.Article;

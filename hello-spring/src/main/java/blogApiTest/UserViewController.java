@@ -1,4 +1,4 @@
-package login.securitylogin.controller;
+package blogApiTest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -1,4 +1,4 @@
-package login.securitylogin.controller;
+package blogApiTest;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

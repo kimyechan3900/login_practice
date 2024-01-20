@@ -1,4 +1,4 @@
-package login.securitylogin.controller;
+package blogApiTest;
 
 import lombok.Getter;
 import lombok.Setter;
