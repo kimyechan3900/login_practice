@@ -38,7 +38,7 @@ public class WebOAuthSecurityConfig {
     public WebSecurityCustomizer configure() {
         return (web) -> web.ignoring()
                 .requestMatchers(toH2Console())
-                .requestMatchers("/img/**", "/css/**", "/js/**");
+                .requestMatchers("/img/**", "/css/**", "/js/**"); // 해당 URL 보안검사 무시.
     }
 
 
@@ -50,14 +50,14 @@ public class WebOAuthSecurityConfig {
                 .formLogin().disable()
                 .logout().disable();
 
-        http.sessionManagement() // 세션관리 설정 (Stateless로 설정)
+        http.sessionManagement() // 세션관리 설정 (Stateless로 설정 -> 세션 사용X)
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-        //헤더 확인 커스텀 필터 추가.
+        //헤더 확인 커스텀 필터 추가.  (JWT 토큰 필터)(tokenAuthenticationFilter)
         http.addFilterBefore(tokenAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
 
 
-        http.authorizeRequests() // api/token은 인증없이 접근 가능 , 나머지는 인증 필요
+        http.authorizeRequests() // 'api/token'은 인증없이 접근 가능 , 나머지 '/api/**'는 인증 필요
                 .requestMatchers("/api/token").permitAll()
                 .requestMatchers("/api/**").authenticated()
                 .anyRequest().permitAll();
@@ -84,7 +84,7 @@ public class WebOAuthSecurityConfig {
     }
 
 
-    @Bean// 로그인 성공시 실행 핸들러
+    @Bean// OAuth2 로그인 성공시 실행 핸들러 -> OAuth2 성공 후 바로 실행.
     public OAuth2SuccessHandler oAuth2SuccessHandler() {
 
         // OAuth2SuccessHandler를 실행함.
