@@ -26,6 +26,7 @@ public class TokenProvider {
     //토큰 생성 메서드
     public String generateToken(User user, Duration expiredAt) { // User , 만료시간을 입력받음.
         Date now = new Date(); // 현재시간을 가져옴.
+        System.out.println("token 생성 1");
         return makeToken(new Date(now.getTime() + expiredAt.toMillis()), user); // 만료시간 설정후 토큰 생성
     }
 
@@ -33,6 +34,8 @@ public class TokenProvider {
     //토큰 제작 메서드
     private String makeToken(Date expiry, User user) {
         Date now = new Date();
+
+        System.out.println("token 생성 1");
 
         //jwt 빌더
         return Jwts.builder()
@@ -52,7 +55,7 @@ public class TokenProvider {
             Jwts.parser() // jwt 파서 활용
                     .setSigningKey(jwtProperties.getSecretKey()) // SecretKey 활용해 서명
                     .parseClaimsJws(token); // 토큰 파싱 -> 유효하지 않을 경우 예외 발생.
-
+            System.out.println("token 검사 1");
             return true;
         } catch (Exception e) {
             return false;

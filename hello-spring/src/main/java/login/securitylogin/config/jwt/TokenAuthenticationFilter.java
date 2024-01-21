@@ -15,8 +15,6 @@ import java.io.IOException;
 @RequiredArgsConstructor // 토큰 필터 클래스
 public class TokenAuthenticationFilter extends OncePerRequestFilter {
     private final TokenProvider tokenProvider;
-
-
     private final static String HEADER_AUTHORIZATION = "Authorization"; //HTTP 요청 헤더에서 Authorization 정보를 가지고 옴.
     private final static String TOKEN_PREFIX = "Bearer "; // 토큰 접두사 지정.
 

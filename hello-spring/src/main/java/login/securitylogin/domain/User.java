@@ -29,10 +29,20 @@ public class User implements UserDetails { // UserDetails를 상속받음 -> 해
     @Column(name = "password", nullable = false)
     private String password;
 
+    @Column(name = "nickname", unique = true)
+    private String nickname;
+
     @Builder // Builder 생성자
-    public User(String email, String password, String auth) {
+    public User(String email, String password, String nickname) {
         this.email = email;
         this.password = password;
+        this.nickname = nickname;
+    }
+
+    public User update(String nickname){
+        this.nickname = nickname;
+
+        return this;
     }
 
 
