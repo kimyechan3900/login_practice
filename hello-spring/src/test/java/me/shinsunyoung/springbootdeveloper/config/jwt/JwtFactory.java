@@ -1,9 +1,8 @@
-package jwtTest.config.jwt;
+package me.shinsunyoung.springbootdeveloper.config.jwt;
 
 import io.jsonwebtoken.Header;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import login.securitylogin.config.jwt.JwtProperties;
 import lombok.Builder;
 import lombok.Getter;
 

@@ -1,14 +1,13 @@
-package jwtTest.controller;
+package me.shinsunyoung.springbootdeveloper.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import jwtTest.config.jwt.JwtFactory;
-import login.securitylogin.SpringBootDeveloperApplication;
-import login.securitylogin.config.jwt.JwtProperties;
-import login.securitylogin.config.jwt.domain.RefreshToken;
-import login.securitylogin.config.jwt.dto.CreateAccessTokenRequest;
-import login.securitylogin.config.jwt.repository.RefreshTokenRepository;
-import login.securitylogin.domain.User;
-import login.securitylogin.repository.UserRepository;
+import me.shinsunyoung.springbootdeveloper.config.jwt.JwtFactory;
+import me.shinsunyoung.springbootdeveloper.config.jwt.JwtProperties;
+import me.shinsunyoung.springbootdeveloper.domain.RefreshToken;
+import me.shinsunyoung.springbootdeveloper.domain.User;
+import me.shinsunyoung.springbootdeveloper.dto.CreateAccessTokenRequest;
+import me.shinsunyoung.springbootdeveloper.repository.RefreshTokenRepository;
+import me.shinsunyoung.springbootdeveloper.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -23,12 +22,13 @@ import org.springframework.web.context.WebApplicationContext;
 
 import java.util.Map;
 
+import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
-@SpringBootTest(classes = SpringBootDeveloperApplication.class)
+@SpringBootTest
 @AutoConfigureMockMvc
 class TokenApiControllerTest {
 

@@ -1,11 +1,8 @@
-package jwtTest.config.jwt;
+package me.shinsunyoung.springbootdeveloper.config.jwt;
 
 import io.jsonwebtoken.Jwts;
-import login.securitylogin.SpringBootDeveloperApplication;
-import login.securitylogin.config.jwt.JwtProperties;
-import login.securitylogin.config.jwt.TokenProvider;
-import login.securitylogin.domain.User;
-import login.securitylogin.repository.UserRepository;
+import me.shinsunyoung.springbootdeveloper.domain.User;
+import me.shinsunyoung.springbootdeveloper.repository.UserRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +16,7 @@ import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringBootTest(classes = SpringBootDeveloperApplication.class)
+@SpringBootTest
 class TokenProviderTest {
 
     @Autowired
