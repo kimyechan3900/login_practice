@@ -82,4 +82,5 @@ public class UserService {
         }
         else throw new InvalidValueException(ErrorCode.MEMBER_NOT_FOUND);//회원 없음
     }
+
 }

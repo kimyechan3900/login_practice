@@ -1,10 +1,10 @@
 package login.securitylogin.controller;
 
-import lombok.RequiredArgsConstructor;
 import login.securitylogin.domain.Article;
 import login.securitylogin.dto.ArticleListViewResponse;
 import login.securitylogin.dto.ArticleViewResponse;
 import login.securitylogin.service.BlogService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

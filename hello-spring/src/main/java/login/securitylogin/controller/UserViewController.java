@@ -6,12 +6,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class UserViewController {
 
-    @GetMapping("/login") // 로그인창 View 메서드
+    @GetMapping("/login")
     public String login() {
-        return "login";
+        return "oauthLogin";
     }
 
-    @GetMapping("/signup") // 회원가입 View 메서드
+    @GetMapping("/signup")
     public String signup() {
         return "signup";
     }

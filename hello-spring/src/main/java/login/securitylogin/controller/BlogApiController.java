@@ -1,15 +1,17 @@
 package login.securitylogin.controller;
 
-import lombok.RequiredArgsConstructor;
 import login.securitylogin.domain.Article;
 import login.securitylogin.dto.AddArticleRequest;
 import login.securitylogin.dto.ArticleResponse;
 import login.securitylogin.dto.UpdateArticleRequest;
 import login.securitylogin.service.BlogService;
+import lombok.RequiredArgsConstructor;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -19,8 +21,8 @@ public class BlogApiController {
     private final BlogService blogService;
 
     @PostMapping("/api/articles")
-    public ResponseEntity<Article> addArticle(@RequestBody AddArticleRequest request) {
-        Article savedArticle = blogService.save(request);
+    public ResponseEntity<Article> addArticle(@RequestBody AddArticleRequest request, Principal principal) {
+        Article savedArticle = blogService.save(request, principal.getName());
 
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(savedArticle);
@@ -62,4 +64,5 @@ public class BlogApiController {
     }
 
 }
+
 
