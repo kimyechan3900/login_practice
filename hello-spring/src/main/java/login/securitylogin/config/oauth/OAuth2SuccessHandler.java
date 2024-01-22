@@ -36,7 +36,7 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
     //Oauth2 인증 성공 시 호출되는 메서드.
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {
-        OAuth2User oAuth2User = (OAuth2User) authentication.getPrincipal(); // 인증 사용자 정보 가져옴
+       /* OAuth2User oAuth2User = (OAuth2User) authentication.getPrincipal(); // 인증 사용자 정보 가져옴
         User user = userService.findByEmail((String) oAuth2User.getAttributes().get("email")); // 이메일 통해 사용자 찾기
 
 
@@ -57,7 +57,7 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
         clearAuthenticationAttributes(request, response);
 
         //지정 URL로 리다이렉트
-        getRedirectStrategy().sendRedirect(request, response, targetUrl);
+        getRedirectStrategy().sendRedirect(request, response, targetUrl);*/
     }
 
     // 리프레시 토큰을 DB에 저장하는 메서드
