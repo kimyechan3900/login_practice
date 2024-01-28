@@ -19,7 +19,7 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
     private final static String TOKEN_PREFIX = "Bearer "; // 토큰 접두사 지정.
 
 
-    //필터 메서드 (HTTP 요청이 올 때마다 실행됨)
+    //필터 메서드 (HTTP 요청이 올 때마다 실행됨) (스프링에서 실행되는게 아닌, Web Context에서 필터링하는 것.)
     @Override
     protected void doFilterInternal(
             HttpServletRequest request, // 요청
@@ -28,6 +28,8 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
 
         String authorizationHeader = request.getHeader(HEADER_AUTHORIZATION);
         String token = getAccessToken(authorizationHeader); // 헤더에서 토큰 정보를 가지고 옴
+
+        System.out.println("doFilterInternal");
 
         //토큰 유효성 검사
         if (tokenProvider.validToken(token)) {

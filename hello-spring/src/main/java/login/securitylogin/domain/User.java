@@ -29,7 +29,7 @@ public class User implements UserDetails { // UserDetails를 상속받음 -> 해
     @Column(name = "password")
     private String password;
 
-    @Column(name = "nickname", unique = true)
+    @Column(name = "nickname")
     private String nickname;
 
     @Builder // Builder 생성자

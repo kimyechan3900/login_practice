@@ -28,8 +28,8 @@ public class OAuth2UserCustomService extends DefaultOAuth2UserService {
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
         OAuth2User user = super.loadUser(userRequest); // ❶ 요청을 바탕으로 유저 정보를 담은 객체 반환
 
-        System.out.println(user);
-        System.out.println("Access Token: " + userRequest.getAccessToken().getTokenValue());
+        /*System.out.println(user);
+        System.out.println("Access Token: " + userRequest.getAccessToken().getTokenValue());*/
         String provider = userRequest.getClientRegistration().getRegistrationId(); // 제공자 확인(kakao, google)
 
         saveOrUpdate(user,provider); // DB 업데이트 작업
@@ -39,6 +39,8 @@ public class OAuth2UserCustomService extends DefaultOAuth2UserService {
 
     // ❷ 유저가 있으면 업데이트, 없으면 유저 생성
     private User saveOrUpdate(OAuth2User oAuth2User, String provider) {
+
+        System.out.println("OAuth2UserCustomService");
 
         String email;
         String name;

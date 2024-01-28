@@ -10,6 +10,7 @@ import login.securitylogin.service.UserService;
 import login.securitylogin.util.CookieUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
@@ -17,6 +18,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.io.IOException;
 import java.time.Duration;
+import java.util.Map;
 
 @RequiredArgsConstructor
 @Component
@@ -36,12 +38,23 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
     //Oauth2 인증 성공 시 호출되는 메서드.
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {
-        OAuth2User oAuth2User = (OAuth2User) authentication.getPrincipal(); // 인증 사용자 정보 가져옴
-        User user = userService.findByEmail((String) oAuth2User.getAttributes().get("email")); // 이메일 통해 사용자 찾기
+        OAuth2AuthenticationToken token = (OAuth2AuthenticationToken) authentication;
+        OAuth2User oAuth2User = token.getPrincipal();
 
+        String registrationId = token.getAuthorizedClientRegistrationId(); // 인증 서비스 구분
 
-        System.out.println(request.getRequestURI());
-        System.out.println(request.getRequestURL());
+        String email;
+        if (registrationId.equals("google")) {
+            email = (String) oAuth2User.getAttributes().get("email");
+        } else if (registrationId.equals("kakao")) {
+            Map<String, Object> kakaoAccount = (Map<String, Object>) oAuth2User.getAttributes().get("kakao_account");
+            email = (String) kakaoAccount.get("email");
+        } else {
+            throw new IllegalArgumentException("Not supported provider : " + registrationId);
+        }
+
+        User user = userService.findByEmail(email);
+        System.out.println(user);
 
 
         //리프레시 토큰 생성 및 저장 후 쿠키 추가

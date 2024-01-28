@@ -34,7 +34,7 @@ public class TokenProvider {
     private String makeToken(Date expiry, User user) {
         Date now = new Date();
 
-        System.out.println("token create");
+        System.out.println("Token make");
 
         //jwt 빌더
         return Jwts.builder()
@@ -52,8 +52,8 @@ public class TokenProvider {
     public boolean validToken(String token) {
         try {
             Jwts.parser() // jwt 파서 활용
-                    .setSigningKey(jwtProperties.getSecretKey()) // SecretKey 활용해 서명
-                    .parseClaimsJws(token); // 토큰 파싱 -> 유효하지 않을 경우 예외 발생.
+                    .setSigningKey(jwtProperties.getSecretKey()) // 스프링 서버의 SecretKey 활용
+                    .parseClaimsJws(token); // 토큰 복호화(파싱) -> 유효하지 않을 경우 예외 발생.
             return true;
         } catch (Exception e) {
             return false;
