@@ -1,4 +1,4 @@
-package login.securitylogin.global.security;
+package login.securitylogin.global.config.security;
 
 import login.securitylogin.global.jwt.TokenAuthenticationFilter;
 import login.securitylogin.global.jwt.TokenProvider;
